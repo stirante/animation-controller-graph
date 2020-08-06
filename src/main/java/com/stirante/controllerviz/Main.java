@@ -62,9 +62,11 @@ public class Main {
                 }
                 for (String stateId : animationController.states.keySet()) {
                     State state = animationController.states.get(stateId);
-                    for (Transition transition : state.transitions) {
-                        nodeMap.put(stateId, nodeMap.get(stateId)
-                                .link(to(nodeMap.get(transition.targetState)).with("label", transition.condition)));
+                    if (state.transitions != null) {
+                        for (Transition transition : state.transitions) {
+                            nodeMap.put(stateId, nodeMap.get(stateId)
+                                    .link(to(nodeMap.get(transition.targetState)).with("label", transition.condition)));
+                        }
                     }
                     if (stateId.equals(initialState)) {
                         nodeMap.put(stateId, nodeMap.get(stateId).with(Color.RED));
